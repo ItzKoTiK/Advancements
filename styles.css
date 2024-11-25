@@ -105,9 +105,9 @@ body {
 .tooltip .description {
     color: #7ae976;
     background-color: rgba(34, 32, 34, 255);
-    border-left: 1px solid rgba(255, 255, 255, 0.2);
-    border-bottom: 1px solid rgba(0, 0, 0, 0.3);
-    border-right: 1px solid rgba(0, 0, 0, 0.3);
+    border-left: 2px solid rgba(255, 255, 255, 0.2);
+    border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+    border-right: 2px solid rgba(255, 255, 255, 0.2);
     padding: 6px;
     border-radius: 0 0 4px 4px;
     margin: 0;
