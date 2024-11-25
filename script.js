@@ -1,27 +1,26 @@
-// Get advancements and tooltip elements
-const advancements = document.querySelectorAll(".advancement");
+// Select both advancements and challenges
+const elements = document.querySelectorAll(".advancement, .challenge");
 const tooltip = document.getElementById("tooltip");
 
 // Load saved states from localStorage
-advancements.forEach((advancement) => {
-    const id = advancement.dataset.id;
+elements.forEach((element) => {
+    const id = element.dataset.id;
     const completed = localStorage.getItem(id) === "true";
 
-    // Apply 'completed' class if the achievement is saved as completed
+    // Apply 'completed' class if the element is saved as completed
     if (completed) {
-        advancement.classList.add("completed");
+        element.classList.add("completed");
     }
 
-    // Toggle completion status when the advancement is clicked
-    advancement.addEventListener("click", () => {
-        const isCompleted = !advancement.classList.contains("completed");
-        advancement.classList.toggle("completed", isCompleted);
+    // Toggle completion status when the element is clicked
+    element.addEventListener("click", () => {
+        const isCompleted = !element.classList.contains("completed");
+        element.classList.toggle("completed", isCompleted);
         localStorage.setItem(id, isCompleted);
 
         // Check if the tooltip is currently showing and update it
         if (tooltip.style.display === "block") {
-            // Update the tooltip immediately after the click
-            if (advancement.classList.contains("completed")) {
+            if (element.classList.contains("completed")) {
                 tooltip.classList.add("completed");
             } else {
                 tooltip.classList.remove("completed");
@@ -30,34 +29,48 @@ advancements.forEach((advancement) => {
     });
 
     // Show the tooltip on mouseover
-    advancement.addEventListener("mouseover", (event) => {
+    element.addEventListener("mouseover", (event) => {
         // Set the tooltip content
         tooltip.innerHTML = `
-            <div class="title">${advancement.dataset.title}</div>
-            <div class="description">${advancement.dataset.description}</div>
-        `;
+        <div class="title">${element.dataset.title}</div>
+        <div class="description">${element.dataset.description}</div>
+    `;
 
-        // Get the position of the entire .advancement div
-        const rect = advancement.getBoundingClientRect();
+        // Get the position of the element
+        const rect = element.getBoundingClientRect();
 
         // Position the tooltip
-        tooltip.style.left = `${rect.left + window.scrollX + rect.width / 2 - tooltip.offsetWidth / 2}px`;
-        tooltip.style.top = `${rect.top + window.scrollY - tooltip.offsetHeight - 10}px`;
+        tooltip.style.left = `${rect.left + window.scrollX + rect.width / 2 - tooltip.offsetWidth / 2 - 31}px`;
+        tooltip.style.top = `${rect.top + window.scrollY - tooltip.offsetHeight + 8}px`;
 
-        // Show the tooltip
+        // Ensure the tooltip is shown and correctly sized
         tooltip.style.display = "block";
+        tooltip.style.height = "auto"; // Ensure the tooltip adjusts height to content
 
-        // Apply completed class to tooltip if the advancement is completed
-        if (advancement.classList.contains("completed")) {
+        // Add challenge class if the element is a challenge
+        if (element.classList.contains("challenge")) {
+            tooltip.classList.add("challenge");
+        } else {
+            tooltip.classList.remove("challenge");
+        }
+
+        // Apply completed class to tooltip if the element is completed
+        if (element.classList.contains("completed")) {
             tooltip.classList.add("completed");
         } else {
             tooltip.classList.remove("completed");
         }
+
+        // Set z-index for the hovered element to be on top
+        element.style.zIndex = 1488;
     });
 
     // Hide the tooltip on mouseout
-    advancement.addEventListener("mouseout", () => {
+    element.addEventListener("mouseout", () => {
         tooltip.style.display = "none";
         tooltip.classList.remove("completed"); // Reset tooltip class on mouseout
+
+        // Reset the z-index of the element when mouse is no longer hovering over it
+        element.style.zIndex = '';
     });
 });

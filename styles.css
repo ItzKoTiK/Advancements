@@ -19,10 +19,27 @@ body {
 /* Tree structure grid */
 .advancements-tree {
     display: grid;
-    grid-template-columns: repeat(5, 25px); /* Adjusted grid size to reduce spacing */
+    grid-template-columns: repeat(20, 25px); /* Adjusted grid size to reduce spacing */
     grid-auto-rows: 25px;
+    grid-gap: 1px;
     position: relative;
     padding: 10px;
+}
+
+/* Challenges */
+.challenge {
+    width: 52px;
+    height: 52px;
+    background-image: url("assets/challenge.webp");
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10; /* Place lines below challenges */
+}
+
+.challenge.completed {
+    background-image: url("assets/challenge_completed.webp");
 }
 
 /* Individual advancements */
@@ -38,6 +55,13 @@ body {
 }
 
 .advancement img {
+    width: 30px;
+    height: 30px;
+    pointer-events: none;
+    user-select: none;
+}
+
+.challenge img {
     width: 30px;
     height: 30px;
     pointer-events: none;
@@ -77,13 +101,13 @@ body {
     font-size: 12px;
     padding: 0;
     border-radius: 4px;
-    border: 1px solid #000000;
-    z-index: 1488;
+    border: 1px solid black;
+    z-index: 50;
     display: none;
     pointer-events: none;
     white-space: normal;
     width: fit-content;
-    max-width: 200px;
+    max-width: 250px;
     background: rgba(18, 18, 18, 0.9); /* General background */
     user-select: none;
 }
@@ -98,8 +122,13 @@ body {
     border-bottom: 2px solid rgba(0, 0, 0, 0.3);
     border-right: 2px solid rgba(0, 0, 0, 0.3);
     border-radius: 4px;
+    padding-left: 56px;
     margin: 0;
-    text-shadow: 1.5px 1.5px 0 rgba(0, 0, 0, 0.35);
+    text-shadow: 1.5px 1.5px 0 rgba(0, 0, 0, 0.5);
+}
+
+.tooltip.challenge .description {
+    color: #a800a8;
 }
 
 .tooltip .description {
@@ -109,16 +138,12 @@ body {
     border-bottom: 2px solid rgba(255, 255, 255, 0.2);
     border-right: 2px solid rgba(255, 255, 255, 0.2);
     padding: 6px;
+    padding-bottom: 3px;
     border-radius: 0 0 4px 4px;
     margin: 0;
 }
 
 /* Tooltip completed (for completed advancement) */
 .tooltip.completed .title {
-    background: rgba(186, 144, 42, 0.9);
-    color: #fff;
-}
-
-.tooltip.completed .description {
-    color: #7ae976;
+    background: rgb(186, 144, 42);
 }
