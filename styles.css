@@ -1,0 +1,117 @@
+@font-face {
+    font-family: "Minecraftia";
+    src: url("minecraftia.woff");
+}
+
+/* General body styles */
+body {
+    font-family: "Minecraftia", sans-serif;
+    background-image: url("assets/dirt.png");
+    background-size: 52px;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* Tree structure grid */
+.advancements-tree {
+    display: grid;
+    grid-template-columns: repeat(5, 25px); /* Adjusted grid size to reduce spacing */
+    grid-auto-rows: 25px;
+    position: relative;
+    padding: 10px;
+}
+
+/* Individual advancements */
+.advancement {
+    width: 52px;
+    height: 52px;
+    background-image: url("assets/advancement.png");
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10; /* Place lines below advancements */
+}
+
+.advancement img {
+    width: 30px;
+    height: 30px;
+    pointer-events: none;
+    user-select: none;
+}
+
+/* Completed advancements */
+.advancement.completed {
+    background-image: url("assets/advancement_completed.png");
+}
+
+/* Connection lines */
+.line {
+    background-color: white;
+    border-color: black;
+    border: solid 2px;
+    position: absolute;
+    z-index: 1; /* Place lines below advancements */
+}
+
+.line.horizontal {
+    height: 2px;
+    width: 51px;
+    top: 25px;
+}
+
+.line.vertical {
+    width: 2px;
+    height: 52px;
+    left: 24px;
+}
+
+/* Tooltip */
+.tooltip {
+    position: absolute;
+    color: #fff9d4;
+    font-size: 12px;
+    padding: 0;
+    border-radius: 4px;
+    border: 1px solid #000000;
+    z-index: 1488;
+    display: none;
+    pointer-events: none;
+    white-space: normal;
+    width: 250px;
+    background: rgba(18, 18, 18, 0.9); /* General background */
+    user-select: none;
+}
+
+/* Split the tooltip into two halves */
+.tooltip .title {
+    background-color: white;
+    color: #000;
+    padding: 6px;
+    border-radius: 4px 4px 0 0;
+    margin: 0;
+    text-shadow: 1.5px 1.5px 0 rgba(0, 0, 0, 0.35);
+}
+
+.tooltip .description {
+    background-color: rgba(34, 32, 34, 255);
+    color: #ccc;
+    padding: 6px;
+    border-radius: 0 0 4px 4px;
+    border: 1px solid #555555;
+    margin: 0;
+}
+
+/* Tooltip completed (for completed advancement) */
+.tooltip.completed .title {
+    background: rgba(186, 144, 42, 0.9);
+    color: #fff;
+}
+
+.tooltip.completed .description {
+    color: lime;
+}
