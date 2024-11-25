@@ -2,10 +2,10 @@
 const elements = document.querySelectorAll(".advancement, .challenge");
 const tooltip = document.getElementById("tooltip");
 
-// Load saved states from localStorage
+// Load saved states from localStorage based on title
 elements.forEach((element) => {
-    const id = element.dataset.id;
-    const completed = localStorage.getItem(id) === "true";
+    const title = element.dataset.title;
+    const completed = localStorage.getItem(title) === "true";
 
     // Apply 'completed' class if the element is saved as completed
     if (completed) {
@@ -16,7 +16,7 @@ elements.forEach((element) => {
     element.addEventListener("click", () => {
         const isCompleted = !element.classList.contains("completed");
         element.classList.toggle("completed", isCompleted);
-        localStorage.setItem(id, isCompleted);
+        localStorage.setItem(title, isCompleted);
 
         // Check if the tooltip is currently showing and update it
         if (tooltip.style.display === "block") {
